@@ -17,6 +17,7 @@ interface State {
   texture: BlockType;
   blocks: Block[];
   inventory: { [key in BlockType]?: number };
+  setBlocks: (blocks: Block[]) => void;
   addBlock: (x: number, y: number, z: number, type?: BlockType) => void;
   removeBlock: (x: number, y: number, z: number) => void;
   setTexture: (texture: BlockType) => void;
@@ -42,6 +43,7 @@ export const useStore = create<State>((set) => ({
   texture: 'grass',
   blocks: getLocalStorage('world') || [],
   inventory: getLocalStorage('inventory') || { grass: 64, dirt: 64 }, // Start with some blocks
+  setBlocks: (blocks) => set(() => ({ blocks })),
   addBlock: (x, y, z, type) => {
     set((state) => {
       const blockType = type || state.texture;

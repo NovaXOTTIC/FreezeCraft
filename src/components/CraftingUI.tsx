@@ -10,7 +10,8 @@ interface CraftingUIProps {
 }
 
 export const CraftingUI = ({ isOpen, onClose, blocksConfig }: CraftingUIProps) => {
-  const [inventory, craftItem] = useStore((state) => [state.inventory, state.craftItem]);
+  const inventory = useStore((state) => state.inventory);
+  const craftItem = useStore((state) => state.craftItem);
 
   return (
     <AnimatePresence>

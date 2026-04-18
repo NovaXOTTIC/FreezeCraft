@@ -45,14 +45,15 @@ const World = () => {
 }
 
 export default function App() {
-  const [blocks, addBlock] = useStore((state) => [state.blocks, state.addBlock]);
+  const blocks = useStore((state) => state.blocks);
+  const setBlocks = useStore((state) => state.setBlocks);
 
   // Initial world generation
   useEffect(() => {
     if (blocks.length === 0) {
-      generateTerrain(addBlock);
+      generateTerrain(setBlocks);
     }
-  }, [addBlock, blocks.length]);
+  }, [setBlocks, blocks.length]);
 
   return (
     <div className="w-full h-screen bg-sky-300 overflow-hidden">

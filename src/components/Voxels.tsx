@@ -91,7 +91,8 @@ export const Block = ({ position, type }: { position: [number, number, number], 
   const [hover, setHover] = useState<number | null>(null);
   const addBlock = useStore((state) => state.addBlock);
   const removeBlock = useStore((state) => state.removeBlock);
-  const [activeTexture, inventory] = useStore((state) => [state.texture, state.inventory]);
+  const activeTexture = useStore((state) => state.texture);
+  const inventory = useStore((state) => state.inventory);
 
   const [ref] = useBox(() => ({
     type: 'Static',

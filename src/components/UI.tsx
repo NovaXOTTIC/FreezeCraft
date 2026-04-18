@@ -32,7 +32,11 @@ const HOTBAR_BLOCKS: BlockType[] = [
 ];
 
 export const UI = () => {
-  const [activeTexture, setTexture, saveWorld, resetWorld, inventory] = useStore((state) => [state.texture, state.setTexture, state.saveWorld, state.resetWorld, state.inventory]);
+  const activeTexture = useStore((state) => state.texture);
+  const setTexture = useStore((state) => state.setTexture);
+  const saveWorld = useStore((state) => state.saveWorld);
+  const resetWorld = useStore((state) => state.resetWorld);
+  const inventory = useStore((state) => state.inventory);
   const [isPointerLocked, setIsPointerLocked] = useState(false);
   const [isCraftingOpen, setIsCraftingOpen] = useState(false);
 

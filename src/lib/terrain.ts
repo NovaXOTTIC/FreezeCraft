@@ -1,10 +1,12 @@
 import { createNoise2D } from 'simplex-noise';
-import { BlockType } from '../hooks/useStore';
+import { BlockType, Block } from '../hooks/useStore';
+import { nanoid } from 'nanoid';
 
-export const generateTerrain = (addBlock: any) => {
+export const generateTerrain = (setBlocks: any) => {
   const noise2D = createNoise2D();
   const SIZE = 20;
   const DEPTH = 5;
+  const newBlocks: Block[] = [];
 
   for (let x = -SIZE; x < SIZE; x++) {
     for (let z = -SIZE; z < SIZE; z++) {
@@ -20,7 +22,7 @@ export const generateTerrain = (addBlock: any) => {
           type = 'dirt';
         }
 
-        addBlock(x, y, z, type);
+        newBlocks.push({ key: nanoid(), pos: [x, y, z], type });
       }
 
       // Random trees
@@ -31,7 +33,7 @@ export const generateTerrain = (addBlock: any) => {
 
         // Trunk
         for (let i = 1; i <= trunkHeight; i++) {
-          addBlock(treeX, height + i, treeZ, 'log');
+          newBlocks.push({ key: nanoid(), pos: [treeX, height + i, treeZ], type: 'log' });
         }
 
         // Leaves
@@ -39,7 +41,7 @@ export const generateTerrain = (addBlock: any) => {
           for (let lz = -2; lz <= 2; lz++) {
             for (let ly = 0; ly <= 2; ly++) {
               if (Math.abs(lx) + Math.abs(lz) + Math.abs(ly) < 4) {
-                addBlock(treeX + lx, height + trunkHeight + ly, treeZ + lz, 'leaves');
+                newBlocks.push({ key: nanoid(), pos: [treeX + lx, height + trunkHeight + ly, treeZ + lz], type: 'leaves' });
               }
             }
           }
@@ -47,4 +49,6 @@ export const generateTerrain = (addBlock: any) => {
       }
     }
   }
+  
+  setBlocks(newBlocks);
 };

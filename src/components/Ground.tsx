@@ -17,7 +17,9 @@ export const Ground = () => {
     position: [0, -0.5, 0],
   }));
 
-  const [addBlock, activeTexture, inventory] = useStore((state) => [state.addBlock, state.texture, state.inventory]);
+  const addBlock = useStore((state) => state.addBlock);
+  const activeTexture = useStore((state) => state.texture);
+  const inventory = useStore((state) => state.inventory);
 
   return (
     <mesh

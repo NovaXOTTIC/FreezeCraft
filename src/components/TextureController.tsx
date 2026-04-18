@@ -3,7 +3,7 @@ import { useStore, BlockType } from '../hooks/useStore';
 import { useKeyboard } from '../hooks/useKeyboard';
 
 export const TextureController = () => {
-  const [setTexture] = useStore((state) => [state.setTexture]);
+  const setTexture = useStore((state) => state.setTexture);
   const { dirt, grass, glass, wood, log, cobblestone, stone, sand, diamond_ore } = useKeyboard();
 
   useEffect(() => {
